@@ -1,0 +1,10 @@
+### 1. 상품 등록 테스트 (POST)
+POST http://localhost:8080/products?name=SpringJPA&price=25000
+Content-Type: application/json
+
+### 2. 상품 등록 테스트 2 (하나 더 추가)
+POST http://localhost:8080/products?name=DockerGuide&price=18000
+Content-Type: application/json
+
+### 3. 전체 상품 조회 테스트 (GET)
+GET http://localhost:8080/products
