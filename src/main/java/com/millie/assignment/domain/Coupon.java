@@ -17,7 +17,6 @@ public class Coupon {
     private BigDecimal value; // 할인 값 (퍼센트면 10, 금액이면 1000 등)
     private CouponStatus status;       // Enum
 
-    // ✅ 핵심: 도메인은 이제 "String"이 아니라 "LocalDate"를 가집니다.
     private LocalDate aplyStrtDt;
     private LocalDate aplyEndDt;
 
