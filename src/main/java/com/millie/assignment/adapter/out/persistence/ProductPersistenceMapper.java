@@ -15,7 +15,7 @@ public class ProductPersistenceMapper {
                 .name(entity.getName())
                 .originalPrice(entity.getOriginalPrice())
 
-                // ✅ 추가된 할인 정보 매핑
+                // 추가된 할인 정보 매핑
                 .discountType(entity.getDiscountType())
                 .value(entity.getValue())
 
