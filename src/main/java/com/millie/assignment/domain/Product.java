@@ -10,14 +10,15 @@ import java.time.LocalDateTime;
 
 @Getter
 @ToString
+// 이 클래스는 도메인 레이어에서 상품 정보를 표현합니다. Hexagonal Architecture에서 Domain 모델에 해당합니다.
 public class Product {
     private Long id;
     private String name;
-    private BigDecimal originalPrice;   // 정가
+    private BigDecimal originalPrice; // 정가
 
     // [변경된 할인 구조]
-    private DiscountType discountType;  // 할인 유형 (PERCENTAGE, AMOUNT)
-    private BigDecimal value;           // 할인 값 (10% or 1000원)
+    private DiscountType discountType; // 할인 유형 (PERCENTAGE, AMOUNT)
+    private BigDecimal value; // 할인 값 (10% or 1000원)
     private BigDecimal discountPercent; // (참고용/기본) 할인율 - 필요 시 유지
 
     private ProductStatus productStatus;
@@ -34,10 +35,10 @@ public class Product {
 
     @Builder
     public Product(Long id, String name, BigDecimal originalPrice,
-                   DiscountType discountType, BigDecimal value, BigDecimal discountPercent,
-                   ProductStatus productStatus, boolean isCouponApplicable, Integer stockQuantity,
-                   LocalDateTime saleStartAt, LocalDateTime saleEndAt,
-                   String rgstEmpNo, LocalDateTime rgstOc, String lstAltrEmpNo, LocalDateTime lstAltrOc) {
+            DiscountType discountType, BigDecimal value, BigDecimal discountPercent,
+            ProductStatus productStatus, boolean isCouponApplicable, Integer stockQuantity,
+            LocalDateTime saleStartAt, LocalDateTime saleEndAt,
+            String rgstEmpNo, LocalDateTime rgstOc, String lstAltrEmpNo, LocalDateTime lstAltrOc) {
 
         this.id = id;
         this.name = name;
@@ -72,7 +73,8 @@ public class Product {
      * - 10원 단위 절사
      */
     public BigDecimal calculateProductPrice() {
-        if (originalPrice == null) return BigDecimal.ZERO;
+        if (originalPrice == null)
+            return BigDecimal.ZERO;
         // 할인이 없거나 타입이 없으면 정가 리턴
         if (discountType == null || value.compareTo(BigDecimal.ZERO) == 0) {
             return originalPrice;
@@ -103,6 +105,7 @@ public class Product {
 
     /**
      * 2. 쿠폰까지 적용한 최종 금액 계산
+     * 
      * @param coupon 적용하려는 쿠폰 (Nullable)
      */
     public BigDecimal calculateFinalPriceWithCoupon(Coupon coupon) {
@@ -149,8 +152,10 @@ public class Product {
         }
         // 판매 기간 내에 있어야 함 (Start <= now <= End)
         // null인 경우 기간 제한 없음으로 간주할지, 불가로 볼지는 정책 나름 (여기선 기간 필수 가정)
-        if (saleStartAt != null && now.isBefore(saleStartAt)) return false;
-        if (saleEndAt != null && now.isAfter(saleEndAt)) return false;
+        if (saleStartAt != null && now.isBefore(saleStartAt))
+            return false;
+        if (saleEndAt != null && now.isAfter(saleEndAt))
+            return false;
 
         return true;
     }

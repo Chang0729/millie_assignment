@@ -1,23 +1,30 @@
 package com.millie.assignment.application.port.in;
 
+import com.millie.assignment.domain.DiscountType;
 import com.millie.assignment.domain.Product;
+import com.millie.assignment.domain.ProductStatus;
+import com.millie.assignment.domain.DiscountType;
+
 import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Data // Getter, Setter, toString 등을 자동 생성
+// @Data: Lombok이 getter, setter, toString 등을 자동 생성합니다.
+@Data
+// @Builder: Lombok이 빌더 패턴을 제공하여 객체 생성 시 가독성을 높입니다.
 @Builder
+// ProductResponse: API 응답용 DTO이며, 도메인 객체와 매핑됩니다.
 public class ProductResponse {
     private Long id;
     private String name;
     private BigDecimal originalPrice;
     private BigDecimal finalPrice; // 계산된 최종 가격 (할인 적용 후)
 
-    private com.millie.assignment.domain.DiscountType discountType;
+    private DiscountType discountType;
     private BigDecimal value;
     private BigDecimal discountPercent;
-    private com.millie.assignment.domain.ProductStatus productStatus;
+    private ProductStatus productStatus;
     private boolean isCouponApplicable;
     private Integer stockQuantity;
     private java.time.LocalDateTime saleStartAt;

@@ -10,12 +10,13 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
+// 이 클래스는 도메인 레이어에서 쿠폰 정보를 표현합니다. Hexagonal Architecture에서 Domain 모델에 해당합니다.
 public class Coupon {
     private Long id;
     private String couponNm;
     private DiscountType discountType; // Enum
     private BigDecimal value; // 할인 값 (퍼센트면 10, 금액이면 1000 등)
-    private CouponStatus status;       // Enum
+    private CouponStatus status; // Enum
 
     // ✅ 핵심: 도메인은 이제 "String"이 아니라 "LocalDate"를 가집니다.
     private LocalDate aplyStrtDt;

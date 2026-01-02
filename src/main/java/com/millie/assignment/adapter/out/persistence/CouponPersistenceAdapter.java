@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
+// 이 클래스는 쿠폰 데이터를 로드하는 Outbound Adapter 역할을 수행합니다.
+// LoadCouponPort 인터페이스를 구현하여 도메인 레이어에 쿠폰 조회 기능을 제공합니다.
 public class CouponPersistenceAdapter implements LoadCouponPort {
 
     private final CouponRepository couponRepository;
